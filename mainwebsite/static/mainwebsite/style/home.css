@@ -35,15 +35,16 @@ body,
   .imgSlider {
     width: 78%;
   }
+    .show {
+    display: block;
+  }
 }
 @media (max-width: 520px) {
   .imgSlider {
     width: 94%;
   }
-  .show {
-    display: block;
-  }
 }
+
 
 .carouselBottomDiv{
   height: 40px;
