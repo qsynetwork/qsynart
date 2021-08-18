@@ -1,0 +1,140 @@
+{% load static %}
+{% load thumbnail %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "mainwebsite/style/home.css" %}">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title> সংহতি : An Art Fundraiser for Prithibir Pathshala</title>
+      <style>
+          #cartCount{
+              height: 10px;
+              width: 10px;
+              background-color: red;
+              border-radius: 5px;
+              padding: 5px;
+              color: white;
+          }
+      </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid text-light">
+            <a class="navbar-brand" href="#">
+                সংহতি : An Art Fundraiser for <br class="show"> Prithibir Pathshala
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-4 mb-2 mb-lg-0">
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/about/">About</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/artists/">Artist</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/cart/">Cart <span id="cartCount">0</span></a>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="col-lg-6 col-md-6 mx-auto mt-5 text-light">
+        <div class="line">
+
+            <h1 class="fw-light text-center mb-2 p-2">সংহতি /noun/ </h1>
+            <h6 class="text-center mb-5 p-2 text-light">
+                solidarity; mobilization; compactness; agglomeration; consolidation; concentration
+            </h6>
+        </div>
+        <p class="lead text-muted text-center p-2">
+            In our 75 Prithibir Pathshalas across Bengal we try to reimagine classroom spaces creatively so that our students not only succeed at academics but also learn about the larger world and its structures and question them wherever necessary. We felt an art fundraiser to be a natural extension of not only our activities at the pathshala, but also of the teaching-learning process that we try to inculcate there. We hope to uphold these through our efforts to the best of our abilities, through our ground work, and through সংহতি : An Art Fundraiser for Prithibir Pathshala. We trust that you will stand by our students as they grow up to a more equal future.
+        </p>
+        <p class="d-flex align-items-center justify-content-center">
+          <a href="/about/" class="btn btn-primary my-2 btn-warning btn-lg">About Fundraiser<br><i>Prithibir Pathshala</i></a>
+        </p>
+      </div>
+      <div class="container my-5 imgSlider">
+
+          {% for artist in artists %}
+
+          <div id="Unique{{ artist.id }}" class="carousel slide" data-bs-ride="carousel" onclick='window.location.href="/artist/{{ artist.id }}/"' >
+            <div class="carousel-indicators">
+            {% for image in artist.artwork_of_artist.all %}
+                {% if forloop.counter0 == 0 %}
+                    <button type="button" data-bs-target="#Unique{{ artist.id }}" data-bs-slide-to="{{ forloop.counter0 }}" class="active" aria-current="true" aria-label="Slide {{ image.id }}"></button>
+                    {% else %}
+                    <button type="button" data-bs-target="#Unique{{ artist.id }}" data-bs-slide-to="{{ forloop.counter0 }}" aria-label="Slide {{ image.id }}"></button>
+                {% endif %}
+            {% endfor %}
+            </div>
+            <div class="carousel-inner">
+                {% for image in artist.artwork_of_artist.all %}
+                    {% if forloop.counter0 == 0 %}
+                        <div class="carousel-item active">
+                        {% thumbnail image.picture.path "600" crop="noop" as im %}
+                            <img src="{{ im.url }}"  class="d-block w-100" alt="...">
+                        {% endthumbnail %}
+                        </div>
+                        {% else %}
+                        <div class="carousel-item ">
+                        {% thumbnail image.picture.path "600" crop="noop" as im %}
+                            <img src="{{ im.url }}"  class="d-block w-100" alt="...">
+                        {% endthumbnail %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#Unique{{ artist.id }}" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#Unique{{ artist.id }}" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+              <div class="carouselBottomDiv">
+                  <a target="_blank" href="/artist/{{ artist.id }}/" >
+                    See all artwork by {{ artist.name }}
+                </a>
+              </div>
+
+          {% endfor %}
+
+      </div>
+
+
+
+
+      <div class="container">
+        <footer class="py-3 my-4">
+            <a href="#" class="nav-link px-2 text-light text-center"> সংহতি : An Art Fundraiser for Prithibir Pathshala</a>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script>
+        $.cookie.json = true;
+
+        $(function(){
+            if(typeof  $.cookie('cartHistory') === "undefined") return;
+             const data = $.cookie('cartHistory').cartItems;
+             $("#cartCount").html(data.length);
+         });
+
+    </script>
+  </body>
+</html>
+

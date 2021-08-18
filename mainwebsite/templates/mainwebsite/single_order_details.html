@@ -1,0 +1,92 @@
+{% load thumbnail %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Order Info</title>
+  </head>
+  <body class="container">
+    <h3>Order Id : <i>{{ order_record.order_id }}</i></h3>
+    <hr>
+    <h5> :: Customer Details :: </h5>
+    <table class="table">
+        <tr>
+            <td>Customer Name</td>
+            <td>{{ order_record.customer_name }}</td>
+        </tr>
+        <tr>
+            <td>Phone No</td>
+            <td>{{ order_record.customer_phoneNo }}</td>
+        </tr>
+        <tr>
+            <td>Email ID</td>
+            <td>{{ order_record.customer_email }}</td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td>{{ order_record.customer_address }}</td>
+        </tr>
+        <tr>
+            <td>Pincode</td>
+            <td>{{ order_record.customer_pinCode }}</td>
+        </tr>
+    </table>
+
+    <h5 class="my-3"> :: Transaction Details :: </h5>
+    <table class="table">
+        <tr>
+            <td>Ketto Transaction Details</td>
+            <td><a href="/media/{{ order_record.ketto_transaction_details }}/" target="_blank">Click Here To View / Download</a></td>
+        </tr>
+        <tr>
+            <td>Gross Total Price</td>
+            <td>{{ order_record.total_price }} ₹</td>
+        </tr>
+    </table>
+
+    <h5 class="my-3"> :: Order Details :: </h5>
+    <table class="table">
+        <tr>
+            <td>ID</td>
+            <td>Artist</td>
+            <td>Image</td>
+            <td>Size</td>
+            <td>Price Per Product</td>
+            <td>Quantity</td>
+            <td>Total Price</td>
+        </tr>
+        {% for i in order_history %}
+        <tr>
+            <td>{{ i.product_id }}</td>
+            <td><a href="/artist/{{ i.artist_id }}/" target="_blank">{{ i.artist_name }}</a></td>
+            <td>
+                {% thumbnail i.product_image_path "x100" crop="noop" as im %}
+                    <a href="{{ i.product_image_link }}" target="_blank" style="cursor: pointer"><img src="{{ im.url }}" height="100" alt="..."></a>
+                {% endthumbnail %}
+            </td>
+            <td>{{ i.size }}</td>
+            <td>{{ i.price_per_product }}</td>
+            <td>{{ i.quantity }}</td>
+            <td>{{ i.total_price }} ₹</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

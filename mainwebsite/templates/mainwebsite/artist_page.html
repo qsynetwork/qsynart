@@ -1,0 +1,218 @@
+{% load static %}
+{% load thumbnail %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://rawgit.com/LeshikJanz/libraries/master/Bootstrap/baguetteBox.min.css">
+    <link rel="stylesheet" href="{% static "mainwebsite/style/allArts.css" %}">
+    <script
+    src="https://kit.fontawesome.com/92b21ed5b0.js"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js" integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Artists' artwork</title>
+</head>
+<body>
+    <a class="cartFloating" href="/cart/"><i class="fas fa-shopping-cart fa-lg"></i><span id="cartCount">0</span></a>
+
+
+<div class="container gallery-container">
+
+    <h2 style="color : #fff!important;text-align:center;" onclick='window.location.href="/"'><i class="fas fa-home"></i>&nbsp;&nbsp;সংহতি : An Art Fundraiser for Prithibir Pathshala</h2>
+
+    <p class="page-description text-center">By <i>{{ artist.name }}</i></p>
+
+    <div class="tz-gallery">
+
+        <div class="row">
+
+            {% for image in artist.artwork_of_artist.all %}
+
+                <div class="col-sm-6 col-md-4 cardfull">
+                    <a class="lightbox" href="/media/{{ image.picture }}/">
+                        {% thumbnail image.picture.path "400" crop="noop" as im %}
+                            <img src="{{ im.url }}" class="d-block w-100" alt="...">
+                        {% endthumbnail %}</a>
+                        <a class="btn btn-danger" onclick="addToCartModalShow({{ image.id }})"><i class="fas fa-shopping-cart"></i>&nbsp;Add To Cart</a>
+              </div>
+
+            {% endfor %}
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<div class="modal fade" id="modaltest" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Select Size</h4>
+        </div>
+        <div class="modal-body" >
+            <form id="productSubmit">
+                <input type="hidden" name="artwork_id" value="-1" >
+                {% for i in size %}
+                    <div class="form-check">
+                        <input  lass="form-check-input" type="radio" id="{{ i.size }}" name="sizeToCheckout" value="{{ i.size }}">
+                        <label lass="form-check-label" for="{{ i.size }}">{{ i.size }}  Price : {{ i.price }} INR</label><hr>
+                    </div>
+                {% endfor %}
+            </form>
+
+
+
+            </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success" onclick="addToCart()">Add To Cart</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- Large modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modaltest">Large modal</button> -->
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+<script>
+    baguetteBox.run('.tz-gallery');
+
+    $.cookie.json = true;
+    let cart_items ;
+    const emptyData = {"cartItems": []};
+    let idlist = [];
+
+
+
+    $(function(){
+        if(typeof  $.cookie('cartHistory') === "undefined") return;
+         const data = $.cookie('cartHistory').cartItems;
+        $("#cartCount").html(data.length);
+         for(i in data){
+             idlist.push(`${data[parseInt(i)].productId}|${data[parseInt(i)].size}`)
+         }
+         cart_items = data;
+     });
+
+    function addToCartModalShow(artworkid) {
+        $('input[name=artwork_id]', '#productSubmit').val(artworkid);
+        $('#modaltest').modal('show');
+    }
+
+    function addToCart(){
+        var artworkid = $('input[name=artwork_id]', '#productSubmit').val();
+        if($('input[name=sizeToCheckout]:checked', '#productSubmit').val() === undefined) return;
+        var size = $('input[name=sizeToCheckout]:checked', '#productSubmit').val();
+        console.log(`Adding ${artworkid}  ${size}  1`);
+        addProduct(artworkid,size,1);
+        $('#modaltest').modal('hide');
+    }
+
+    function removeItemOnce(arr, value) {
+      var index = arr.indexOf(value);
+      if (index > -1) {
+        arr.splice(index, 1);
+      }
+      return arr;
+    }
+
+    function addAndGetUpdatedJson(productId, size, quantity) {
+     if (!$.cookie('cartHistory')) {
+       $.cookie('cartHistory', emptyData,{ path: '/' });
+     }
+      var cart = $.cookie('cartHistory');
+      cart.cartItems.push({"productId": productId, "size": size, "quantity": quantity});
+      return cart;
+     }
+
+    function addProduct(productId, size, quantity){
+         if(!idlist.includes(`${productId.toString()}|${size}`)){
+             idlist.push(`${productId}|${size}`);
+             var jsonData = addAndGetUpdatedJson(productId, size, quantity);
+             cart_items = jsonData.cartItems;
+             $.cookie('cartHistory', jsonData,{ path: '/' })  ;
+         }
+         update_cart();
+     }
+
+    function reduce_product_quantity(id, size) {
+        for (i in cart_items) {
+            if (cart_items[i].productId == id && cart_items[i].size == size) {
+                if (cart_items[i].quantity > 1) {
+                    cart_items[i].quantity = cart_items[i].quantity - 1;
+                    {#id = id.toString();#}
+                    {#$('.counter' + id).val(cart_items[i].quantity);#}
+                } else {
+                    cart_items.splice(i, 1);
+                    {#p_id = id.toString();#}
+                    {#$(".main" + p_id).hide();#}
+                    break;
+                }
+                break;
+            }
+        }
+        var cartItems = {"cartItems": cart_items};
+        $.cookie('cartHistory', cartItems,{ path: '/' });
+        update_cart();
+    }
+
+    function increase_product_quantity(id, size) {
+        for (i in cart_items) {
+            if (cart_items[i].productId == id && cart_items[i].size == size) {
+                if (cart_items[i].quantity > 1) {
+                    cart_items[i].quantity = cart_items[i].quantity + 1;
+                    {#id = id.toString();#}
+                    {#$('.counter' + id).val(cart_items[i].quantity);#}
+                }
+                break;
+            }
+        }
+        var cartItems = {"cartItems": cart_items};
+        $.cookie('cartHistory', cartItems,{ path: '/' });
+        update_cart();
+    }
+
+    function delete_from_cart(id,size){
+
+        for( i in cart_items ){
+            if( cart_items[i].productId == id && cart_items[i].size == size){
+                removeItemOnce(idlist,`${id}|${size}`)
+                cart_items.splice(i,1);
+                {#p_id = id.toString();#}
+                {#$(".main"+p_id).hide();#}
+            break;
+            }
+        }
+        var cartItems = {"cartItems": cart_items};
+        $.cookie('cartHistory', cartItems,{ path: '/' });
+
+        update_cart();
+    }
+
+    function update_cart() {
+        console.log("Update UI");
+        console.log(cart_items);
+        $("#cartCount").html(cart_items.length);
+    }
+
+</script>
+</body>
+</html>
+
+
+

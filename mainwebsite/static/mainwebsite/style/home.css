@@ -1,0 +1,67 @@
+body,
+.navbar {
+  background-color: #060f29 !important;
+}
+
+.active {
+  color: #ffc107 !important;
+}
+
+.navbar .nav-link {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0 1rem;
+}
+.navbar .nav-link:hover {
+  color: #ffc107 !important;
+  opacity: 0.7;
+}
+.line {
+  border-top: 5px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 5px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1.5rem;
+  margin: 2rem 1.5rem;
+}
+
+.imgSlider {
+  width: 50%;
+}
+
+.show {
+  display: none;
+}
+
+@media (max-width: 750px) {
+  .imgSlider {
+    width: 78%;
+  }
+}
+@media (max-width: 520px) {
+  .imgSlider {
+    width: 94%;
+  }
+  .show {
+    display: block;
+  }
+}
+
+.carouselBottomDiv{
+  height: 40px;
+  width: 100%;
+background: #4b6cb7;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #182848, #4b6cb7);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carouselBottomDiv a{
+  text-decoration: none;
+  color: snow;
+  font-size: 1.3rem;
+  font-weight: bold;
+  font-family: 'Source Sans Pro', sans-serif;
+}
