@@ -10,8 +10,8 @@ urlpatterns = [
     path('', include('mainwebsite.urls'))
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+# if settings.DEBUG:
+urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 
 #Step 6 : Setup to access static file in debug mode
-    urlpatterns += staticfiles_urlpatterns()
+urlpatterns += staticfiles_urlpatterns()

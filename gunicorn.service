@@ -1,0 +1,17 @@
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+User=centos
+Group=nobody
+WorkingDirectory=/home/centos/qysnart
+ExecStart=/home/centos/qysnart/env/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/gunicorn.sock \
+          qysnart.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
