@@ -84,13 +84,13 @@
                 {% for image in artist.artwork_of_artist.all %}
                     {% if forloop.counter0 == 0 %}
                         <div class="carousel-item active">
-                        {% thumbnail image.picture.path "600" crop="noop" as im %}
+                        {% thumbnail image.picture.path "400" crop="noop" as im %}
                             <img src="{{ im.url }}"  class="d-block w-100" alt="...">
                         {% endthumbnail %}
                         </div>
                         {% else %}
                         <div class="carousel-item ">
-                        {% thumbnail image.picture.path "600" crop="noop" as im %}
+                        {% thumbnail image.picture.path "400" crop="noop" as im %}
                             <img src="{{ im.url }}"  class="d-block w-100" alt="...">
                         {% endthumbnail %}
                         </div>
