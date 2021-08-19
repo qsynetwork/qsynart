@@ -89,6 +89,11 @@
                             <div class="btn btn-insta round"><a target="_blank" href="{{ artist.instagram_link }}"><i class="fab fa-instagram"></i></a></div>
                         {% endif %}
 
+                        {% if artist.instagram_link2  %}
+                        <div class="btn btn-insta round"><a target="_blank" href="{{ artist.instagram_link }}"><i class="fab fa-instagram"></i></a></div>
+                        {% endif %}
+
+
                         {% if artist.email_address  %}
                             <div class="btn btn-dark round"><a target="_blank" href="mailto:{{ artist.email_address }}"><i class="fas fa-envelope"></i></a></div>
                         {% endif %}
