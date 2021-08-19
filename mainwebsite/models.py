@@ -6,6 +6,7 @@ from django.db import models
 class Artists(models.Model):
     name = models.CharField(max_length=200, null=True)
     profile_picture = models.FileField(null=True, default="default_pic.jpg")
+    about = models.TextField(null=True,blank=True)
     facebook_link = models.CharField(max_length=200, null=True, blank=True, default="")
     instagram_link = models.CharField(max_length=200, null=True, blank=True, default="")
     linkedin_link = models.CharField(max_length=200, null=True, blank=True, default="")
