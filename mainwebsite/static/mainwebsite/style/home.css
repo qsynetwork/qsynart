@@ -63,7 +63,7 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
   text-align: center;
   text-decoration: none;
   color: snow;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: bold;
   font-family: 'Source Sans Pro', sans-serif;
 }
@@ -74,6 +74,6 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
     height: 80px;
   }
   .carouselBottomDiv a{
-    font-size: 0.7rem;
+    font-size: 0.9rem;
   }
 }
