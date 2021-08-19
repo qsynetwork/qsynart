@@ -9,6 +9,7 @@ class Artists(models.Model):
     about = models.TextField(null=True,blank=True)
     facebook_link = models.CharField(max_length=200, null=True, blank=True, default="")
     instagram_link = models.CharField(max_length=200, null=True, blank=True, default="")
+    instagram_link2 = models.CharField(max_length=200, null=True, blank=True, default="")
     linkedin_link = models.CharField(max_length=200, null=True, blank=True, default="")
     youtube_link = models.CharField(max_length=200, null=True, blank=True, default="")
     email_address = models.CharField(max_length=200, null=True, blank=True, default="")
