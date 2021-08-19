@@ -47,7 +47,7 @@ body,
 
 
 .carouselBottomDiv{
-  height: 40px;
+  height: 60px;
   width: 100%;
 background: #4b6cb7;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, #182848, #4b6cb7);  /* Chrome 10-25, Safari 5.1-6 */
@@ -60,9 +60,10 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
 }
 
 .carouselBottomDiv a{
+  text-align: center;
   text-decoration: none;
   color: snow;
-  font-size: 1.3rem;
+  font-size: 0.9rem;
   font-weight: bold;
   font-family: 'Source Sans Pro', sans-serif;
 }
