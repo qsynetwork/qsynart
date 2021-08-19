@@ -108,7 +108,7 @@ a{
 
 /* Floating button */
 .cartFloating{
-    position: absolute;
+    position: fixed;
     bottom: 10px;
     right: 20px;
     background-color: coral;

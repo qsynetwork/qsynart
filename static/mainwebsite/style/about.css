@@ -38,7 +38,7 @@ body {
 }
 
 .infoTxt {
-  width: 34rem;
+  /*width: 34rem;*/
   line-height: 1.7rem;
 }
 
@@ -60,4 +60,11 @@ body {
   .aboutTxt{
     flex-direction: column;
   }
+}
+
+@media (max-width: 750px) {
+  .show {
+    display: block;
+  }
+
 }

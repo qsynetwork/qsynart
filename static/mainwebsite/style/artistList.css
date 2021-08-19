@@ -26,7 +26,12 @@ body {
   display: none;
 }
 
+@media (max-width: 750px) {
+  .show {
+    display: block;
+  }
 
+}
 /* Specifi css  */
 
 .round {
