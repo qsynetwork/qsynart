@@ -33,7 +33,12 @@
     {% endthumbnail %}</a>
 
     <div>
-        <div class="d-flex flex-wrap mb-3 mt-3 justify-content-center" >
+        <div style=" justify-content: center;
+        display: flex;
+        flex-direction: row;
+        /* height: 60px; */
+        align-items: center;
+        margin-top: 10px;" >
             {% if artist.facebook_link %}
                 <div class="btn btn-primary round"><a target="_blank" href="{{ artist.facebook_link }}"><i class="fab fa-facebook-f"></i></a></div>
             {% endif %}
