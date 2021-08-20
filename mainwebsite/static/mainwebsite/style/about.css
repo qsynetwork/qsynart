@@ -41,6 +41,7 @@ body {
   /*width: 34rem;*/
   width: 75%;
   line-height: 1.7rem;
+  text-align: justify;
 }
 
 .round {
@@ -60,6 +61,9 @@ body {
   }
   .aboutTxt{
     flex-direction: column;
+  }
+  .infoTxt{
+    width: 100%;
   }
 }
 
