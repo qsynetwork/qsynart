@@ -39,6 +39,7 @@ body {
 
 .infoTxt {
   /*width: 34rem;*/
+  width: 75%;
   line-height: 1.7rem;
 }
 
