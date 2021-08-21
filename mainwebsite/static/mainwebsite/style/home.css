@@ -17,10 +17,14 @@ body,
   opacity: 0.7;
 }
 .line {
-  border-top: 5px solid rgba(255, 255, 255, 0.1);
-  border-bottom: 5px solid rgba(255, 255, 255, 0.1);
+  /* border-top: 5px solid rgba(255, 255, 255, 0.1); */
+  /* border-bottom: 5px solid rgba(255, 255, 255, 0.1); */
   padding-top: 1.5rem;
-  margin: 2rem 1.5rem;
+  /* margin: 2rem 1.5rem; */
+  margin-top: 6rem;
+}
+.line img{
+  width: 60%;
 }
 
 .imgSlider {
@@ -34,6 +38,9 @@ body,
 @media (max-width: 750px) {
   .imgSlider {
     width: 78%;
+  }
+  .line img{
+    width: 100%;
   }
     .show {
     display: block;
