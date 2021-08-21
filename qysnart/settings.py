@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-nj!82$mdq^s3%s&&m8$h$47#*3j&9%^$fo6tg36y@3l)+$*d2&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["qsyn.art","35.154.225.96"]
+ALLOWED_HOSTS = ["qsyn.art","35.154.225.96","127.0.0.1"]
 
 # Application definition
 
