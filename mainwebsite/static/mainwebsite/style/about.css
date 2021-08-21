@@ -60,6 +60,19 @@ body {
   transform: scale(1.1);
 }
 
+
+
+
+.line {
+  /* border-top: 5px solid rgba(255, 255, 255, 0.1); */
+  /* border-bottom: 5px solid rgba(255, 255, 255, 0.1); */
+  padding-top: 1.5rem;
+  /* margin: 2rem 1.5rem; */
+  margin-top: 6rem;
+  display: flex;
+  justify-content: center;
+}
+
 @media (max-width: 520px) {
   .show {
     display: block;
@@ -73,8 +86,14 @@ body {
 }
 
 @media (max-width: 750px) {
+  #headerCArousel{
+    width: 100%;
+  }
   .show {
     display: block;
   }
 
 }
+
+
+
