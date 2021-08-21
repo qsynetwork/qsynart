@@ -1,6 +1,13 @@
 *{
   box-sizing: border-box;
 }
+
+@import url('http://fonts.cdnfonts.com/css/gotham');
+                
+a,h1,h2,h3,h4,h5,h6,p{
+  font-family: 'Gotham', sans-serif!important;
+}
+
 body,
 .navbar {
   background-color: #060f29 !important;
