@@ -22,8 +22,10 @@ body,
   padding-top: 1.5rem;
   /* margin: 2rem 1.5rem; */
   margin-top: 6rem;
+  display: flex;
+  justify-content: center;
 }
-.line img{
+#headerCArousel{
   width: 60%;
 }
 
@@ -39,7 +41,7 @@ body,
   .imgSlider {
     width: 78%;
   }
-  .line img{
+  #headerCArousel{
     width: 100%;
   }
     .show {
