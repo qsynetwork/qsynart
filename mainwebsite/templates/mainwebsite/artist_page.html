@@ -30,7 +30,7 @@
 
     {% thumbnail artist.profile_picture.path "200" crop="noop" as im %}
         <img src="{{  im.url }}" style=" width: 200px; border: 3px solid transparent; border-image: linear-gradient(to right, #2196f3, #f44336); border-image-slice: 1;">
-    {% endthumbnail %}</a>
+    {% endthumbnail %}
 
     <div>
         <div style=" justify-content: center;
@@ -85,9 +85,11 @@
 
                 <div class="col-sm-6 col-md-4 cardfull">
                     <a class="lightbox" href="/media/{{ image.picture }}/">
+
                         {% thumbnail image.picture.path "400" crop="noop" as im %}
                             <img src="{{ im.url }}" class="d-block w-100" alt="...">
                         {% endthumbnail %}</a>
+                        <input type="hidden" id="available_sizes_{{ image.id }}" value="{% for size in image.sizes_available %}{{ size }}|{% endfor %}">
                         <a class="btn btn-danger" onclick="addToCartModalShow({{ image.id }})"><i class="fas fa-shopping-cart"></i>&nbsp;Add To Cart</a>
               </div>
 
@@ -114,7 +116,7 @@
             <form id="productSubmit">
                 <input type="hidden" name="artwork_id" value="-1" >
                 {% for i in size %}
-                    <div class="form-check">
+                    <div class="form-check" id="modal_option_{{ i.id }}">
                         <input  lass="form-check-input" type="radio" id="{{ i.size }}" name="sizeToCheckout" value="{{ i.size }}">
                         <label lass="form-check-label" for="{{ i.size }}">{{ i.size }}  Price : {{ i.price }} INR</label><hr>
                     </div>
@@ -161,6 +163,18 @@
 
     function addToCartModalShow(artworkid) {
         $('input[name=artwork_id]', '#productSubmit').val(artworkid);
+        var available_sizes = $(`#available_sizes_${artworkid}`).val().split("|").filter(function (x) { return x != ""; }).map(function (item) {
+            return parseInt(item);
+        });
+        for (let i = 2;i<=9;i++){
+            console.log(available_sizes.includes(i));
+            console.log(i);
+            if(available_sizes.includes(i)){
+                $(`#modal_option_${i}`).show();
+            }else {
+                $(`#modal_option_${i}`).hide();
+            }
+        }
         $('#modaltest').modal('show');
     }
 
