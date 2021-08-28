@@ -1,6 +1,7 @@
 import random
 
 from django.db import models
+from multiselectfield import MultiSelectField
 
 
 class Artists(models.Model):
@@ -19,10 +20,21 @@ class Artists(models.Model):
     def __str__(self):
         return self.name
 
+SIZE_CHOICES = (
+    (2,"10x10"),
+    (3,"20x20"),
+    (4,"29x14.5"),
+    (5,"42x21"),
+    (6,"A3"),
+    (7,"A4"),
+    (8,"A5"),
+    # (9,"A6")
+)
 
 class Artwork(models.Model):
     artist = models.ForeignKey(Artists, on_delete=models.CASCADE, related_name="artwork_of_artist")
     picture = models.FileField(null=True)
+    sizes_available = MultiSelectField(choices=SIZE_CHOICES,null=True)
 
 
 class ArtworkSize(models.Model):

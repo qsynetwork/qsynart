@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mainwebsite.apps.MainwebsiteConfig',
-    'sorl.thumbnail'
+    'sorl.thumbnail',
+    'multiselectfield'
 ]
 
 MIDDLEWARE = [
