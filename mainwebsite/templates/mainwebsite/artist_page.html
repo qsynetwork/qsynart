@@ -163,18 +163,18 @@
 
     function addToCartModalShow(artworkid) {
         $('input[name=artwork_id]', '#productSubmit').val(artworkid);
-        var available_sizes = $(`#available_sizes_${artworkid}`).val().split("|").filter(function (x) { return x != ""; }).map(function (item) {
-            return parseInt(item);
-        });
-        for (let i = 2;i<=10;i++){
-            console.log(available_sizes.includes(i));
-            console.log(i);
-            if(available_sizes.includes(i)){
-                $(`#modal_option_${i}`).show();
-            }else {
-                $(`#modal_option_${i}`).hide();
-            }
-        }
+        // var available_sizes = $(`#available_sizes_${artworkid}`).val().split("|").filter(function (x) { return x != ""; }).map(function (item) {
+        //     return parseInt(item);
+        // });
+        // for (let i = 2;i<=10;i++){
+        //     console.log(available_sizes.includes(i));
+        //     console.log(i);
+        //     if(available_sizes.includes(i)){
+        //         $(`#modal_option_${i}`).show();
+        //     }else {
+        //         $(`#modal_option_${i}`).hide();
+        //     }
+        // }
         $('#modaltest').modal('show');
     }
 
